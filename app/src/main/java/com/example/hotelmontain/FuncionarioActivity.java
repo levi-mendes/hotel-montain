@@ -14,12 +14,19 @@ import java.util.Date;
 
 public class FuncionarioActivity extends AppCompatActivity {
 
+    private Button btDataNascimento;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcionario);
 
-        Button btDataNascimento = findViewById(R.id.bt_data_nascimento);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Funcionário");
+
+        btDataNascimento = findViewById(R.id.bt_data_nascimento);
         btDataNascimento.setText(dataNascimento());
         btDataNascimento.setOnClickListener(v-> {
             Calendar calendario = Calendar.getInstance();
@@ -39,11 +46,37 @@ public class FuncionarioActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener =
             (view, year, monthOfYear, dayOfMonth) -> {
 
-//                String formatedDate = dayOfMonth + " de " +
-//                String data = String.valueOf(dayOfMonth) + " /"
-//                        + String.valueOf(monthOfYear+1) + " /" + String.valueOf(year);
-//                Toast.makeText(FuncionarioActivity.this,
-//                        "DATA = " + data, Toast.LENGTH_SHORT)
-//                        .show();
+                String formatedDate = weekDayDescription(dayOfMonth) + ", " + dayOfMonth +
+                        " de " + monthOfYear + " de " + year;
+
+                btDataNascimento.setText(formatedDate);
             };
+
+
+    private String weekDayDescription(int day) {
+        switch (day) {
+            case Calendar.MONDAY:
+                return "Segunda";
+            case Calendar.TUESDAY:
+
+                return "Terça";
+            case Calendar.WEDNESDAY:
+
+                return "Quarta";
+            case Calendar.THURSDAY:
+
+                return "Quinta";
+            case Calendar.FRIDAY:
+
+                return "Sexta";
+            case Calendar.SATURDAY:
+
+                return "Sábado";
+            case Calendar.SUNDAY:
+
+                return "Domingo";
+        }
+
+        return null;
+    }
 }
