@@ -1,16 +1,15 @@
-package com.example.hotelmontain;
+package com.example.hotelmontain.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.Toast;
-
+import com.example.hotelmontain.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class FuncionarioActivity extends AppCompatActivity {
 
@@ -40,43 +39,10 @@ public class FuncionarioActivity extends AppCompatActivity {
     }
 
     private String dataNascimento() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
     }
 
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
-            (view, year, monthOfYear, dayOfMonth) -> {
-
-                String formatedDate = weekDayDescription(dayOfMonth) + ", " + dayOfMonth +
-                        " de " + monthOfYear + " de " + year;
-
-                btDataNascimento.setText(formatedDate);
-            };
-
-
-    private String weekDayDescription(int day) {
-        switch (day) {
-            case Calendar.MONDAY:
-                return "Segunda";
-            case Calendar.TUESDAY:
-
-                return "Terça";
-            case Calendar.WEDNESDAY:
-
-                return "Quarta";
-            case Calendar.THURSDAY:
-
-                return "Quinta";
-            case Calendar.FRIDAY:
-
-                return "Sexta";
-            case Calendar.SATURDAY:
-
-                return "Sábado";
-            case Calendar.SUNDAY:
-
-                return "Domingo";
-        }
-
-        return null;
-    }
+    private final DatePickerDialog.OnDateSetListener mDateSetListener =
+            (view, year, monthOfYear, dayOfMonth) ->
+                    btDataNascimento.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
 }

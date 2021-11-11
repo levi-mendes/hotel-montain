@@ -1,9 +1,13 @@
-package com.example.hotelmontain;
+package com.example.hotelmontain.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.hotelmontain.PesquisaGeralActivity;
+import com.example.hotelmontain.R;
+import com.example.hotelmontain.activities.FuncionarioActivity;
 
 public class MenuActivity extends AppCompatActivity {
 

@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelMontain">
         <activity android:name=".PesquisaGeralActivity"></activity>
-        <activity android:name=".FuncionarioActivity" />
-        <activity android:name=".FornecedorActivity" />
-        <activity android:name=".MenuActivity" /> <!-- <activity android:name=".LoginActivity"></activity> -->
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.FuncionarioActivity" />
+        <activity android:name=".activities.FornecedorActivity" />
+        <activity android:name=".activities.MenuActivity" /> <!-- <activity android:name=".LoginActivity"></activity> -->
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
