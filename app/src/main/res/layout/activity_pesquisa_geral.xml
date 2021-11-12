@@ -14,12 +14,14 @@
         android:hint="CPF/RG do Hóspede/Funcionários/Fornecedor">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_chave_pesquisa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/bt_pesquisar"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:text="Pesquisar" />
