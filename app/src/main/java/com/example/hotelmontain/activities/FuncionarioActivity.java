@@ -85,7 +85,7 @@ public class FuncionarioActivity extends AppCompatActivity {
             Funcionario funcionario = funcionario();
             try {
                 salvar(funcionario);
-                AlertUtil.showSucesso(this, "------- Funcionario salvo com sucesso !!! ------");
+                AlertUtil.showSucesso(this, "------- \nFuncionario salvo com sucesso !!!\n------");
 
             } catch (Exception e) {
                 Log.e("Erro", e.getMessage());

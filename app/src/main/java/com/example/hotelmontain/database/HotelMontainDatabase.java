@@ -14,7 +14,7 @@ public abstract class HotelMontainDatabase extends RoomDatabase {
     public static HotelMontainDatabase getInstance(Context context) {
         if (mAppDatabase == null) {
             mAppDatabase = Room.databaseBuilder(context,
-                    HotelMontainDatabase.class, "comanda-db.db")
+                    HotelMontainDatabase.class, "hotel-montain.db")
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();
