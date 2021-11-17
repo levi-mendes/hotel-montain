@@ -1,11 +1,14 @@
 package com.example.hotelmontain.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,9 +37,10 @@ public class FuncionarioActivity extends AppCompatActivity {
     TextInputEditText etEndereco;
     TextInputEditText etNumero;
     TextInputEditText etCidade;
-    TextInputEditText etEstado;
+    AppCompatSpinner spEstados;
     RadioGroup rgSexo;
     RadioButton rbMasculino, rbFeminino;
+    private ArrayAdapter<CharSequence> adapterEstados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class FuncionarioActivity extends AppCompatActivity {
         etEndereco = findViewById(R.id.et_endereco);
         etNumero = findViewById(R.id.et_numero);
         etCidade = findViewById(R.id.et_cidade);
-        etEstado = findViewById(R.id.et_estado);
+        spEstados = findViewById(R.id.sp_estados);
         rgSexo = findViewById(R.id.rg_sexo);
         rbMasculino = findViewById(R.id.rb_masculino);
         rbFeminino = findViewById(R.id.rb_feminino);
@@ -63,6 +67,8 @@ public class FuncionarioActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("Funcionário");
+
+        carregarEstados();
 
         Funcionario func = (Funcionario)getIntent().getSerializableExtra("funcionario");
 
@@ -94,6 +100,15 @@ public class FuncionarioActivity extends AppCompatActivity {
         });
     }
 
+    private void carregarEstados() {
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        adapterEstados = ArrayAdapter.createFromResource(this,
+                R.array.array_estados, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        //adapterEstados.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spEstados.setAdapter(adapterEstados);
+    }
+
     private void carregarFuncionario(Funcionario funcionario) {
         etNome.setText(funcionario.nome);
         etEmail.setText(funcionario.email);
@@ -105,10 +120,22 @@ public class FuncionarioActivity extends AppCompatActivity {
         etEndereco.setText(funcionario.endereco);
         etNumero.setText(funcionario.numero);
         etCidade.setText(funcionario.cidade);
-        etEstado.setText(funcionario.estado);
+        selectItemEstado(funcionario.estado);
         btDataNascimento.setText(funcionario.dataNascimento);
         rbMasculino.setChecked(funcionario.sexo == 1);
         rbFeminino.setChecked(funcionario.sexo == 0);
+    }
+
+    private void selectItemEstado(String siglaEstado) {
+        for (int index = 0; index < adapterEstados.getCount(); index++) {
+            if (adapterEstados.getItem(index).equals(siglaEstado)) {
+                spEstados.setSelection(index);
+            }
+        }
+    }
+
+    private String getSiglaEstado() {
+        return spEstados.getSelectedItem().toString();
     }
 
     private Funcionario funcionario() {
@@ -126,7 +153,7 @@ public class FuncionarioActivity extends AppCompatActivity {
         funcionario.endereco = etEndereco.getText().toString();
         funcionario.numero = etNumero.getText().toString();
         funcionario.cidade = etCidade.getText().toString();
-        funcionario.estado = etEstado.getText().toString();
+        funcionario.estado = getSiglaEstado();
 
         return funcionario;
     }

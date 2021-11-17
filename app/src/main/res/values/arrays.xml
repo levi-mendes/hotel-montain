@@ -4,4 +4,28 @@
         <item>Masculin</item>
         <item>Feminino</item>
     </string-array>
+
+    <string-array name="array_estados">
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+        <item>SP</item>
+    </string-array>
 </resources>

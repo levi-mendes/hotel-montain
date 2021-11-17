@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HotelMontain</string>
+    <string name="text_estado">Estado</string>
 </resources>

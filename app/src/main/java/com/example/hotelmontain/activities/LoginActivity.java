@@ -26,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
         etLogin = findViewById(R.id.et_login);
         etSenha = findViewById(R.id.et_senha);
 
+        etLogin.setText("admin");
+        etSenha.setText("admin");
+
         findViewById(R.id.bt_entrar).setOnClickListener(v -> login());
     }
 
