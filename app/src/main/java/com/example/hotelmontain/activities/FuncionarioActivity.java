@@ -2,12 +2,9 @@ package com.example.hotelmontain.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
-import androidx.cursoradapter.widget.SimpleCursorAdapter;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -26,20 +23,19 @@ import java.util.Locale;
 public class FuncionarioActivity extends AppCompatActivity {
 
     private Button btDataNascimento;
-
-    TextInputEditText etNome;
-    TextInputEditText etEmail;
-    TextInputEditText etCpf;
-    TextInputEditText etEstadoCivil;
-    TextInputEditText etEcp;
-    TextInputEditText etCargo;
-    TextInputEditText etTelefone;
-    TextInputEditText etEndereco;
-    TextInputEditText etNumero;
-    TextInputEditText etCidade;
-    AppCompatSpinner spEstados;
-    RadioGroup rgSexo;
-    RadioButton rbMasculino, rbFeminino;
+    private TextInputEditText etNome;
+    private TextInputEditText etEmail;
+    private  TextInputEditText etCpf;
+    private TextInputEditText etEstadoCivil;
+    private TextInputEditText etEcp;
+    private TextInputEditText etCargo;
+    private TextInputEditText etTelefone;
+    private TextInputEditText etEndereco;
+    private TextInputEditText etNumero;
+    private TextInputEditText etCidade;
+    private AppCompatSpinner spEstados;
+    private RadioGroup rgSexo;
+    private RadioButton rbMasculino, rbFeminino;
     private ArrayAdapter<CharSequence> adapterEstados;
 
     @Override
@@ -101,17 +97,16 @@ public class FuncionarioActivity extends AppCompatActivity {
     }
 
     private void carregarEstados() {
-        // Create an ArrayAdapter using the string array and a default spinner layout
         adapterEstados = ArrayAdapter.createFromResource(this,
                 R.array.array_estados, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        //adapterEstados.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterEstados.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spEstados.setAdapter(adapterEstados);
     }
 
     private void carregarFuncionario(Funcionario funcionario) {
         etNome.setText(funcionario.nome);
         etEmail.setText(funcionario.email);
+        btDataNascimento.setText(funcionario.dataNascimento);
         etCpf.setText(funcionario.cpf);
         etEstadoCivil.setText(funcionario.estadoCivil);
         etEcp.setText(funcionario.cep);
@@ -121,7 +116,6 @@ public class FuncionarioActivity extends AppCompatActivity {
         etNumero.setText(funcionario.numero);
         etCidade.setText(funcionario.cidade);
         selectItemEstado(funcionario.estado);
-        btDataNascimento.setText(funcionario.dataNascimento);
         rbMasculino.setChecked(funcionario.sexo == 1);
         rbFeminino.setChecked(funcionario.sexo == 0);
     }

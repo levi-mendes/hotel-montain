@@ -257,7 +257,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:prompt="@string/text_estado"
                 android:id="@+id/sp_estados"
                 android:layout_width="0dp"

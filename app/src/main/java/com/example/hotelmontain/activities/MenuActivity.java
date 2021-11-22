@@ -23,5 +23,8 @@ public class MenuActivity extends AppCompatActivity {
         findViewById(R.id.bt_funcionario).setOnClickListener(v -> {
             startActivity(new Intent(this, FuncionarioActivity.class));
         });
+
+        findViewById(R.id.bt_quartos).setOnClickListener(v ->
+                startActivity(new Intent(this, QuartoActivity.class)));
     }
 }
