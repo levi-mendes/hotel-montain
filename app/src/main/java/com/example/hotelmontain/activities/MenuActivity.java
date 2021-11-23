@@ -26,5 +26,8 @@ public class MenuActivity extends AppCompatActivity {
 
         findViewById(R.id.bt_quartos).setOnClickListener(v ->
                 startActivity(new Intent(this, QuartoActivity.class)));
+
+        findViewById(R.id.bt_reservas).setOnClickListener(v ->
+                startActivity(new Intent(this, ReservaActivity.class)));
     }
 }

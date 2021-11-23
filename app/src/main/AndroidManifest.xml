@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelMontain">
-        <activity android:name=".ListaFuncionariosActivity"></activity>
+        <activity android:name=".activities.ReservaActivity"></activity>
+        <activity android:name=".ListaFuncionariosActivity" />
         <activity android:name=".activities.QuartoActivity" />
         <activity android:name=".PesquisaGeralActivity" />
         <activity android:name=".activities.FuncionarioActivity" />

@@ -23,13 +23,13 @@
     <Button
         android:id="@+id/bt_pesquisar"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:text="Pesquisar" />
 
     <Button
         android:id="@+id/bt_novo_cadastro"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:text="Adicionar Novo Cadastro" />
 
 </LinearLayout>
