@@ -15,17 +15,8 @@ public class Quarto implements Serializable {
     public int numTvs;
     public int andar;
     public int numBanheiros;
-    public int numQuartos;
+    public int numQuarto;
     public int numTelefone;
     public int status;
     public double valor;
 }
-
-/*
-
-CREATE TB_QUARTO (id int not null primari key,
-numCamas int not null,
-
-
-
- */

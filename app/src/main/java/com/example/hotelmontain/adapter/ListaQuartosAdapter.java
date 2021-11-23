@@ -7,21 +7,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hotelmontain.R;
 import com.example.hotelmontain.activities.QuartoActivity;
+import com.example.hotelmontain.database.HotelMontainDatabase;
 import com.example.hotelmontain.database.Quarto;
+import com.example.hotelmontain.database.QuartoDao;
+import com.example.hotelmontain.util.AlertUtil;
+import com.example.hotelmontain.util.ToastUtil;
 
 import java.util.List;
+
+import static java.lang.String.valueOf;
 
 public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapter.ViewHolder> {
 
     private List<Quarto> localDataSet;
+    private OnQuartoRemovido onQuartoRemovido;
+    private Context mContext;
 
-    public ListaQuartosAdapter(List<Quarto> dataSet) {
+    public ListaQuartosAdapter(Context context, List<Quarto> dataSet, OnQuartoRemovido onQuartoRemovido) {
         localDataSet = dataSet;
+        this.onQuartoRemovido = onQuartoRemovido;
+        mContext = context;
     }
 
     /**
@@ -31,7 +41,7 @@ public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvNumQuarto, tvAndar, tvTelefone;
-        private final ImageView ivEdit;
+        private final ImageView ivEdit, ivApagar;
 
         public ViewHolder(View view) {
             super(view);
@@ -41,6 +51,7 @@ public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapte
             tvTelefone = view.findViewById(R.id.tv_num_quarto);
 
             ivEdit = view.findViewById(R.id.iv_edit);
+            ivApagar = view.findViewById(R.id.iv_apagar);
         }
     }
 
@@ -53,18 +64,44 @@ public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Context context = viewHolder.itemView.getContext();
         Quarto quarto = localDataSet.get(position);
 
-        viewHolder.tvNumQuarto.setText("" + quarto.numQuartos);
-        viewHolder.tvAndar.setText("" + quarto.andar);
-        viewHolder.tvTelefone.setText("" + quarto.numTelefone);
-        viewHolder.ivEdit.setOnClickListener(v ->
-                context.startActivity(new Intent(context, QuartoActivity.class)));
+        viewHolder.tvNumQuarto.setText(valueOf(quarto.numQuarto));
+        viewHolder.tvAndar.setText(valueOf(quarto.andar));
+        viewHolder.tvTelefone.setText(valueOf(quarto.numTelefone));
+        viewHolder.ivEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, QuartoActivity.class);
+            intent.putExtra("quarto", quarto);
+            mContext.startActivity(intent);
+        });
+        viewHolder.ivApagar.setOnClickListener(v -> removeDeletion(quarto));
     }
 
+    private void removeDeletion(Quarto quarto) {
+        new AlertDialog.Builder(mContext)
+                .setMessage("Confirma a exclusao desse quarto ?")
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    try {
+                        QuartoDao dao = HotelMontainDatabase.getInstance(mContext).quartoDao();
+                        dao.remover(quarto);
+                        onQuartoRemovido.remover(quarto);
+                        ToastUtil.show(mContext, "Quarto excluido com sucesso");
+
+                    } catch (Exception e) {
+                        AlertUtil.showAlert(mContext, "Erro ao tentar remover o quarto");
+                    }
+
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
     @Override
     public int getItemCount() {
         return localDataSet.size();
+    }
+
+    public interface OnQuartoRemovido {
+
+        void remover(Quarto quarto);
     }
 }

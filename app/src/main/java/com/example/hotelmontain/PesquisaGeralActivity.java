@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-
 import com.example.hotelmontain.activities.FuncionarioActivity;
 import com.example.hotelmontain.database.Funcionario;
 import com.example.hotelmontain.database.FuncionarioDao;
