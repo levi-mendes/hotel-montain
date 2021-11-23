@@ -47,8 +47,8 @@ public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapte
             super(view);
 
             tvNumQuarto = view.findViewById(R.id.tv_num_quarto);
-            tvAndar = view.findViewById(R.id.tv_num_quarto);
-            tvTelefone = view.findViewById(R.id.tv_num_quarto);
+            tvAndar = view.findViewById(R.id.tv_andar);
+            tvTelefone = view.findViewById(R.id.tv_telefone);
 
             ivEdit = view.findViewById(R.id.iv_edit);
             ivApagar = view.findViewById(R.id.iv_apagar);
@@ -66,9 +66,9 @@ public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapte
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Quarto quarto = localDataSet.get(position);
 
-        viewHolder.tvNumQuarto.setText(valueOf(quarto.numQuarto));
-        viewHolder.tvAndar.setText(valueOf(quarto.andar));
-        viewHolder.tvTelefone.setText(valueOf(quarto.numTelefone));
+        viewHolder.tvNumQuarto.append(valueOf(quarto.numQuarto));
+        viewHolder.tvAndar.append(valueOf(quarto.andar));
+        viewHolder.tvTelefone.append(valueOf(quarto.numTelefone));
         viewHolder.ivEdit.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, QuartoActivity.class);
             intent.putExtra("quarto", quarto);
