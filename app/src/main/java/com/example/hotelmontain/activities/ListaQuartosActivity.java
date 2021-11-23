@@ -32,7 +32,7 @@ public class ListaQuartosActivity extends AppCompatActivity {
         findViewById(R.id.pb_loading).setVisibility(View.INVISIBLE);
 
         if (quartos == null || quartos.isEmpty()) {
-            findViewById(R.id.tv_empty).setVisibility(View.INVISIBLE);
+            findViewById(R.id.tv_empty).setVisibility(View.VISIBLE);
             return;
         }
 
