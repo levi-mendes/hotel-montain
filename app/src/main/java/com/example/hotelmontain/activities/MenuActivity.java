@@ -7,6 +7,7 @@ import com.example.hotelmontain.PesquisaGeralActivity;
 import com.example.hotelmontain.R;
 import com.example.hotelmontain.activities.listas.ListaFornecedoresActivity;
 import com.example.hotelmontain.activities.listas.ListaFuncionariosActivity;
+import com.example.hotelmontain.activities.listas.ListaHospedeActivity;
 import com.example.hotelmontain.activities.listas.ListaQuartosActivity;
 import com.example.hotelmontain.activities.listas.ListaReservasActivity;
 
@@ -27,6 +28,10 @@ public class MenuActivity extends AppCompatActivity {
 
         findViewById(R.id.bt_fornecedores).setOnClickListener(v -> {
             startActivity(new Intent(this, ListaFornecedoresActivity.class));
+        });
+
+        findViewById(R.id.bt_hospedes).setOnClickListener(v -> {
+            startActivity(new Intent(this, ListaHospedeActivity.class));
         });
 
         findViewById(R.id.bt_quartos).setOnClickListener(v ->

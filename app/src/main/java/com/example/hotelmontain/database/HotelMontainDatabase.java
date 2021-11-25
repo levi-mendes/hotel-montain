@@ -10,10 +10,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.hotelmontain.database.dao.FornecedorDao;
 import com.example.hotelmontain.database.dao.FuncionarioDao;
+import com.example.hotelmontain.database.dao.HospedeDao;
 import com.example.hotelmontain.database.dao.QuartoDao;
 import com.example.hotelmontain.database.dao.ReservaDao;
 import com.example.hotelmontain.database.entity.Fornecedor;
 import com.example.hotelmontain.database.entity.Funcionario;
+import com.example.hotelmontain.database.entity.Hospede;
 import com.example.hotelmontain.database.entity.Quarto;
 import com.example.hotelmontain.database.entity.Reserva;
 
@@ -21,9 +23,9 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {
         Funcionario.class, Quarto.class, Reserva.class,
-        Fornecedor.class
+        Fornecedor.class, Hospede.class
 },
-        version = 8)
+        version = 9)
 public abstract class HotelMontainDatabase extends RoomDatabase {
 
     private static HotelMontainDatabase mAppDatabase;
@@ -66,4 +68,5 @@ public abstract class HotelMontainDatabase extends RoomDatabase {
     public abstract QuartoDao quartoDao();
     public abstract ReservaDao reservaDao();
     public abstract FornecedorDao fornecedorDao();
+    public abstract HospedeDao hospedeDao();
 }

@@ -18,6 +18,8 @@
         <activity android:name=".PesquisaGeralActivity" />
         <activity android:name=".activities.cadastros.FuncionarioActivity" />
         <activity android:name=".activities.cadastros.FornecedorActivity" />
+        <activity android:name=".activities.cadastros.HospedeActivity" />
+        <activity android:name=".activities.listas.ListaHospedeActivity" />
         <activity android:name=".activities.MenuActivity" /> <!-- <activity android:name=".LoginActivity"></activity> -->
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
