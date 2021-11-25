@@ -12,14 +12,14 @@
         <activity android:name=".activities.listas.ListaReservasActivity"></activity>
         <activity android:name=".activities.listas.ListaQuartosActivity" />
         <activity android:name=".activities.listas.ListaFornecedoresActivity" />
-        <activity android:name=".activities.cadastros.ReservaActivity" />
+<!--        <activity android:name=".activities.cadastros.ReservaActivity" />-->
         <activity android:name=".activities.listas.ListaFuncionariosActivity" />
         <activity android:name=".activities.cadastros.QuartoActivity" />
         <activity android:name=".PesquisaGeralActivity" />
         <activity android:name=".activities.cadastros.FuncionarioActivity" />
         <activity android:name=".activities.cadastros.FornecedorActivity" />
         <activity android:name=".activities.MenuActivity" /> <!-- <activity android:name=".LoginActivity"></activity> -->
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.cadastros.ReservaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
