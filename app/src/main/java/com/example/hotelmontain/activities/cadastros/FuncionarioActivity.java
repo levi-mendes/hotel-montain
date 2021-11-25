@@ -6,8 +6,8 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.example.hotelmontain.R;
@@ -16,14 +16,11 @@ import com.example.hotelmontain.database.dao.FuncionarioDao;
 import com.example.hotelmontain.database.HotelMontainDatabase;
 import com.example.hotelmontain.util.AlertUtil;
 import com.google.android.material.textfield.TextInputEditText;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class FuncionarioActivity extends AppCompatActivity {
 
-    private Button btDataNascimento;
+    private TextInputEditText etDataHora;
     private TextInputEditText etNome;
     private TextInputEditText etEmail;
     private  TextInputEditText etCpf;
@@ -59,12 +56,19 @@ public class FuncionarioActivity extends AppCompatActivity {
         rgSexo = findViewById(R.id.rg_sexo);
         rbMasculino = findViewById(R.id.rb_masculino);
         rbFeminino = findViewById(R.id.rb_feminino);
-        btDataNascimento = findViewById(R.id.bt_data_nascimento);
+        etDataHora = findViewById(R.id.et_data_hora);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("Funcionário");
+
+        etDataHora.setOnTouchListener((v, event)-> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                requestData();
+            }
+            return false;
+        });
 
         carregarEstados();
 
@@ -73,17 +77,6 @@ public class FuncionarioActivity extends AppCompatActivity {
         if (mFuncionario != null) {
             carregarFuncionario();
         }
-
-        btDataNascimento.setText(dataNascimento());
-        btDataNascimento.setOnClickListener(v-> {
-            Calendar calendario = Calendar.getInstance();
-
-            int ano = calendario.get(Calendar.YEAR);
-            int mes = calendario.get(Calendar.MONTH);
-            int dia = calendario.get(Calendar.DAY_OF_MONTH);
-
-            new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
-        });
 
         findViewById(R.id.bt_salvar).setOnClickListener(v -> {
 
@@ -95,6 +88,20 @@ public class FuncionarioActivity extends AppCompatActivity {
         });
     }
 
+    private void requestData() {
+        Calendar calendario = Calendar.getInstance();
+
+        int ano = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH) + 1;
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
+    }
+
+    private final DatePickerDialog.OnDateSetListener mDateSetListener =
+            (view, year, monthOfYear, dayOfMonth) ->
+                    etDataHora.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
+
     private void carregarEstados() {
         adapterEstados = ArrayAdapter.createFromResource(this,
                 R.array.array_estados, android.R.layout.simple_spinner_item);
@@ -105,7 +112,7 @@ public class FuncionarioActivity extends AppCompatActivity {
     private void carregarFuncionario() {
         etNome.setText(mFuncionario.nome);
         etEmail.setText(mFuncionario.email);
-        btDataNascimento.setText(mFuncionario.dataNascimento);
+        etDataHora.setText(mFuncionario.dataNascimento);
         etCpf.setText(mFuncionario.cpf);
         etEstadoCivil.setText(mFuncionario.estadoCivil);
         etEcp.setText(mFuncionario.cep);
@@ -136,7 +143,7 @@ public class FuncionarioActivity extends AppCompatActivity {
 
         funcionario.nome = etNome.getText().toString();
         funcionario.email = etEmail.getText().toString();
-        funcionario.dataNascimento = btDataNascimento.getText().toString();
+        funcionario.dataNascimento = etDataHora.getText().toString();
         funcionario.cpf = etCpf.getText().toString();
         funcionario.sexo = rgSexo.getCheckedRadioButtonId() == R.id.rb_masculino ? 1 : 2;
         funcionario.estadoCivil = etEstadoCivil.getText().toString();
@@ -190,12 +197,4 @@ public class FuncionarioActivity extends AppCompatActivity {
             AlertUtil.showAlert(this, "Erro ao tentar CADASTRAR funcionário");
         }
     }
-
-    private String dataNascimento() {
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-    }
-
-    private final DatePickerDialog.OnDateSetListener mDateSetListener =
-            (view, year, monthOfYear, dayOfMonth) ->
-                    btDataNascimento.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
 }

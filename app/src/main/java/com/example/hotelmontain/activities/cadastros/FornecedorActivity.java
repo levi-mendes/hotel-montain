@@ -7,8 +7,8 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -18,15 +18,11 @@ import com.example.hotelmontain.database.dao.FornecedorDao;
 import com.example.hotelmontain.database.entity.Fornecedor;
 import com.example.hotelmontain.util.AlertUtil;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class FornecedorActivity extends AppCompatActivity {
 
-    private Button btDataNascimento;
+    private TextInputEditText etDataHora;
     private TextInputEditText etNome;
     private TextInputEditText etEmail;
     private  TextInputEditText etCnpj;
@@ -58,12 +54,19 @@ public class FornecedorActivity extends AppCompatActivity {
         rgSexo = findViewById(R.id.rg_sexo);
         rbMasculino = findViewById(R.id.rb_masculino);
         rbFeminino = findViewById(R.id.rb_feminino);
-        btDataNascimento = findViewById(R.id.bt_data_nascimento);
+        etDataHora = findViewById(R.id.et_data_hora);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("Fornecedor");
+
+        etDataHora.setOnTouchListener((v, event)-> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                requestData();
+            }
+            return false;
+        });
 
         carregarEstados();
 
@@ -72,17 +75,6 @@ public class FornecedorActivity extends AppCompatActivity {
         if (mFornecedor != null) {
             carregarnarioFornecedor();
         }
-
-        btDataNascimento.setText(dataNascimento());
-        btDataNascimento.setOnClickListener(v-> {
-            Calendar calendario = Calendar.getInstance();
-
-            int ano = calendario.get(Calendar.YEAR);
-            int mes = calendario.get(Calendar.MONTH);
-            int dia = calendario.get(Calendar.DAY_OF_MONTH);
-
-            new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
-        });
 
         findViewById(R.id.bt_salvar).setOnClickListener(v -> {
 
@@ -104,7 +96,7 @@ public class FornecedorActivity extends AppCompatActivity {
     private void carregarnarioFornecedor() {
         etNome.setText(mFornecedor.nome);
         etEmail.setText(mFornecedor.email);
-        btDataNascimento.setText(mFornecedor.dataNascimento);
+        etDataHora.setText(mFornecedor.dataNascimento);
         etCnpj.setText(mFornecedor.cnpj);
         etEcp.setText(mFornecedor.cep);
         etTelefone.setText(mFornecedor.telefone);
@@ -133,7 +125,7 @@ public class FornecedorActivity extends AppCompatActivity {
 
         f.nome = etNome.getText().toString();
         f.email = etEmail.getText().toString();
-        f.dataNascimento = btDataNascimento.getText().toString();
+        f.dataNascimento = etDataHora.getText().toString();
         f.cnpj = etCnpj.getText().toString();
         f.sexo = rgSexo.getCheckedRadioButtonId() == R.id.rb_masculino ? 1 : 2;
         f.cep = etEcp.getText().toString();
@@ -186,11 +178,17 @@ public class FornecedorActivity extends AppCompatActivity {
         }
     }
 
-    private String dataNascimento() {
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+    private void requestData() {
+        Calendar calendario = Calendar.getInstance();
+
+        int ano = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH) + 1;
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
     }
 
     private final DatePickerDialog.OnDateSetListener mDateSetListener =
             (view, year, monthOfYear, dayOfMonth) ->
-                    btDataNascimento.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
+                    etDataHora.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
 }

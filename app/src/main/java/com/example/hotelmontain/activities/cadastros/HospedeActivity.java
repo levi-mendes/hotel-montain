@@ -3,6 +3,7 @@ package com.example.hotelmontain.activities.cadastros;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -18,15 +19,11 @@ import com.example.hotelmontain.database.dao.HospedeDao;
 import com.example.hotelmontain.database.entity.Hospede;
 import com.example.hotelmontain.util.AlertUtil;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class HospedeActivity extends AppCompatActivity {
 
-    private Button btDataNascimento;
+    private TextInputEditText etDataHora;
     private TextInputEditText etNome;
     private TextInputEditText etEmail;
     private  TextInputEditText etCpf;
@@ -60,7 +57,7 @@ public class HospedeActivity extends AppCompatActivity {
         rgSexo = findViewById(R.id.rg_sexo);
         rbMasculino = findViewById(R.id.rb_masculino);
         rbFeminino = findViewById(R.id.rb_feminino);
-        btDataNascimento = findViewById(R.id.bt_data_nascimento);
+        etDataHora = findViewById(R.id.et_data_hora);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
@@ -75,15 +72,11 @@ public class HospedeActivity extends AppCompatActivity {
             carregarFuncionario();
         }
 
-        btDataNascimento.setText(dataNascimento());
-        btDataNascimento.setOnClickListener(v-> {
-            Calendar calendario = Calendar.getInstance();
-
-            int ano = calendario.get(Calendar.YEAR);
-            int mes = calendario.get(Calendar.MONTH);
-            int dia = calendario.get(Calendar.DAY_OF_MONTH);
-
-            new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
+        etDataHora.setOnTouchListener((v, event)-> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                requestData();
+            }
+            return false;
         });
 
         findViewById(R.id.bt_salvar).setOnClickListener(v -> {
@@ -96,6 +89,20 @@ public class HospedeActivity extends AppCompatActivity {
         });
     }
 
+    private void requestData() {
+        Calendar calendario = Calendar.getInstance();
+
+        int ano = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH) + 1;
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
+    }
+
+    private final DatePickerDialog.OnDateSetListener mDateSetListener =
+            (view, year, monthOfYear, dayOfMonth) ->
+                    etDataHora.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
+
     private void carregarEstados() {
         adapterEstados = ArrayAdapter.createFromResource(this,
                 R.array.array_estados, android.R.layout.simple_spinner_item);
@@ -106,7 +113,7 @@ public class HospedeActivity extends AppCompatActivity {
     private void carregarFuncionario() {
         etNome.setText(mHospede.nome);
         etEmail.setText(mHospede.email);
-        btDataNascimento.setText(mHospede.dataNascimento);
+        etDataHora.setText(mHospede.dataNascimento);
         etCpf.setText(mHospede.cpf);
         etEstadoCivil.setText(mHospede.estadoCivil);
         etEcp.setText(mHospede.cep);
@@ -136,7 +143,7 @@ public class HospedeActivity extends AppCompatActivity {
 
         h.nome = etNome.getText().toString();
         h.email = etEmail.getText().toString();
-        h.dataNascimento = btDataNascimento.getText().toString();
+        h.dataNascimento = etDataHora.getText().toString();
         h.cpf = etCpf.getText().toString();
         h.sexo = rgSexo.getCheckedRadioButtonId() == R.id.rb_masculino ? 1 : 2;
         h.estadoCivil = etEstadoCivil.getText().toString();
@@ -189,12 +196,4 @@ public class HospedeActivity extends AppCompatActivity {
             AlertUtil.showAlert(this, "Erro ao tentar CADASTRAR hospede");
         }
     }
-
-    private String dataNascimento() {
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-    }
-
-    private final DatePickerDialog.OnDateSetListener mDateSetListener =
-            (view, year, monthOfYear, dayOfMonth) ->
-                    btDataNascimento.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
 }

@@ -42,7 +42,6 @@ public class ReservaActivity extends AppCompatActivity {
 
         etNumHospedes = findViewById(R.id.et_num_hospedes);
         etDataHora = findViewById(R.id.et_data_hora);
-        //etDataHora.setOnClickListener(v -> requestData());
 
         etDataHora.setOnTouchListener((v, event)-> {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
