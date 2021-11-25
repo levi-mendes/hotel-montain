@@ -3,14 +3,12 @@ package com.example.hotelmontain.activities.cadastros;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
 import com.example.hotelmontain.R;
 import com.example.hotelmontain.database.HotelMontainDatabase;
 import com.example.hotelmontain.database.dao.QuartoDao;
@@ -19,12 +17,9 @@ import com.example.hotelmontain.database.entity.Quarto;
 import com.example.hotelmontain.database.entity.Reserva;
 import com.example.hotelmontain.util.AlertUtil;
 import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.example.hotelmontain.util.EditTextUtil.getDouble;
 import static com.example.hotelmontain.util.EditTextUtil.getInt;
 import static com.example.hotelmontain.util.EditTextUtil.getTexto;
 import static java.lang.String.valueOf;
