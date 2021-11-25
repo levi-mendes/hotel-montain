@@ -23,6 +23,11 @@ public class ListaFuncionariosActivity extends AppCompatActivity implements List
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_funcionarios);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Lista de Funcionários");
+
         findViewById(R.id.fab_adicionar_funcionario).setOnClickListener(v ->
                 startActivity(new Intent(this, FuncionarioActivity.class)));
     }

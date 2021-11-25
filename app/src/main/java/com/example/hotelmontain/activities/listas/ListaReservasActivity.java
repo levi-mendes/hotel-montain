@@ -21,6 +21,11 @@ public class ListaReservasActivity extends AppCompatActivity implements ListaRes
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_reservas);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Lista de Reservas");
+
         findViewById(R.id.fab_adicionar_reserva).setOnClickListener(v ->
                 startActivity(new Intent(this, ReservaActivity.class)));
     }

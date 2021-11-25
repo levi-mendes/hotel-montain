@@ -23,6 +23,11 @@ public class ListaHospedeActivity extends AppCompatActivity implements ListaHosp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_hospedes);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Lista de Hóspedes");
+
         findViewById(R.id.fab_adicionar_hospedes).setOnClickListener(v ->
                 startActivity(new Intent(this, HospedeActivity.class)));
     }

@@ -61,7 +61,7 @@ public class FuncionarioActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setTitle("Funcionário");
+        getSupportActionBar().setTitle("Cadastro de Funcionário");
 
         etDataHora.setOnTouchListener((v, event)-> {
             if (event.getAction() == MotionEvent.ACTION_UP) {

@@ -44,6 +44,11 @@ public class HospedeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospede);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Cadastro de Hospedes");
+
         etNome = findViewById(R.id.et_nome);
         etEmail = findViewById(R.id.et_email);
         etCpf = findViewById(R.id.et_cpf);

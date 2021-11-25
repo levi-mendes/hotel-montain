@@ -42,6 +42,11 @@ public class FornecedorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fornecedor);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Cadastro de Fornecedores");
+
         etNome = findViewById(R.id.et_nome);
         etEmail = findViewById(R.id.et_email);
         etCnpj = findViewById(R.id.et_cnpj);

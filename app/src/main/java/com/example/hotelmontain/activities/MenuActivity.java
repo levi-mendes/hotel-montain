@@ -18,6 +18,11 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Inicio");
+
         findViewById(R.id.bt_pesquisa).setOnClickListener(v ->
                 startActivity(new Intent(this, PesquisaGeralActivity.class)));
 

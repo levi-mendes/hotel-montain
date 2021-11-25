@@ -40,6 +40,11 @@ public class ReservaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserva);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Cadastro de Reservas");
+
         etNumHospedes = findViewById(R.id.et_num_hospedes);
         etDataHora = findViewById(R.id.et_data_hora);
 

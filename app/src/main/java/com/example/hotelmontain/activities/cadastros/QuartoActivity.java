@@ -33,6 +33,11 @@ public class QuartoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quarto);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Cadastro de Quartos");
+
         etNumCamas = findViewById(R.id.et_num_de_camas);
         etNumTvs = findViewById(R.id.et_num_tvs);
         etAndar = findViewById(R.id.et_andar);

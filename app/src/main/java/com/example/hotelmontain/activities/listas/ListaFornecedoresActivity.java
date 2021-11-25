@@ -23,6 +23,11 @@ public class ListaFornecedoresActivity extends AppCompatActivity implements List
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_fornecedores);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Lista de Fornecedores");
+
         findViewById(R.id.fab_adicionar_fornecedor).setOnClickListener(v ->
                 startActivity(new Intent(this, FornecedorActivity.class)));
     }

@@ -20,6 +20,11 @@ public class ListaQuartosActivity extends AppCompatActivity implements ListaQuar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_quartos);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Lista de Quartos");
+
         findViewById(R.id.fab_adicionar_quarto).setOnClickListener(v -> startActivity(new Intent(this, QuartoActivity.class)));
     }
 
