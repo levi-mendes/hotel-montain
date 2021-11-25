@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.example.hotelmontain.PesquisaGeralActivity;
 import com.example.hotelmontain.R;
-import com.example.hotelmontain.activities.cadastros.FuncionarioActivity;
+import com.example.hotelmontain.activities.listas.ListaFuncionariosActivity;
 import com.example.hotelmontain.activities.listas.ListaQuartosActivity;
 import com.example.hotelmontain.activities.listas.ListaReservasActivity;
 
@@ -21,7 +21,7 @@ public class MenuActivity extends AppCompatActivity {
 
         findViewById(R.id.bt_logout).setOnClickListener(v -> finish());
         findViewById(R.id.bt_funcionario).setOnClickListener(v -> {
-            startActivity(new Intent(this, FuncionarioActivity.class));
+            startActivity(new Intent(this, ListaFuncionariosActivity.class));
         });
 
         findViewById(R.id.bt_quartos).setOnClickListener(v ->

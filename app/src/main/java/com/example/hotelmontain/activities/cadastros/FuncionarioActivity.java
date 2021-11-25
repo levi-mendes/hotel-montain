@@ -1,5 +1,6 @@
 package com.example.hotelmontain.activities.cadastros;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import android.app.DatePickerDialog;
@@ -37,6 +38,7 @@ public class FuncionarioActivity extends AppCompatActivity {
     private RadioGroup rgSexo;
     private RadioButton rbMasculino, rbFeminino;
     private ArrayAdapter<CharSequence> adapterEstados;
+    private Funcionario mFuncionario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +68,10 @@ public class FuncionarioActivity extends AppCompatActivity {
 
         carregarEstados();
 
-        Funcionario func = (Funcionario)getIntent().getSerializableExtra("funcionario");
+        mFuncionario = (Funcionario)getIntent().getSerializableExtra("funcionario");
 
-        if (func != null) {
-            carregarFuncionario(func);
+        if (mFuncionario != null) {
+            carregarFuncionario();
         }
 
         btDataNascimento.setText(dataNascimento());
@@ -84,14 +86,11 @@ public class FuncionarioActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.bt_salvar).setOnClickListener(v -> {
-            Funcionario funcionario = funcionario();
-            try {
-                salvar(funcionario);
-                AlertUtil.showSucesso(this, "------- \nFuncionario salvo com sucesso !!!\n------");
 
-            } catch (Exception e) {
-                Log.e("Erro", e.getMessage());
-                AlertUtil.showAlert(this, "Erro ao tentar salvar funcionário");
+            if (mFuncionario == null) {
+                inserir();
+            } else {
+                atualizar();
             }
         });
     }
@@ -103,21 +102,21 @@ public class FuncionarioActivity extends AppCompatActivity {
         spEstados.setAdapter(adapterEstados);
     }
 
-    private void carregarFuncionario(Funcionario funcionario) {
-        etNome.setText(funcionario.nome);
-        etEmail.setText(funcionario.email);
-        btDataNascimento.setText(funcionario.dataNascimento);
-        etCpf.setText(funcionario.cpf);
-        etEstadoCivil.setText(funcionario.estadoCivil);
-        etEcp.setText(funcionario.cep);
-        etCargo.setText(funcionario.cargo);
-        etTelefone.setText(funcionario.telefone);
-        etEndereco.setText(funcionario.endereco);
-        etNumero.setText(funcionario.numero);
-        etCidade.setText(funcionario.cidade);
-        selectItemEstado(funcionario.estado);
-        rbMasculino.setChecked(funcionario.sexo == 1);
-        rbFeminino.setChecked(funcionario.sexo == 0);
+    private void carregarFuncionario() {
+        etNome.setText(mFuncionario.nome);
+        etEmail.setText(mFuncionario.email);
+        btDataNascimento.setText(mFuncionario.dataNascimento);
+        etCpf.setText(mFuncionario.cpf);
+        etEstadoCivil.setText(mFuncionario.estadoCivil);
+        etEcp.setText(mFuncionario.cep);
+        etCargo.setText(mFuncionario.cargo);
+        etTelefone.setText(mFuncionario.telefone);
+        etEndereco.setText(mFuncionario.endereco);
+        etNumero.setText(mFuncionario.numero);
+        etCidade.setText(mFuncionario.cidade);
+        selectItemEstado(mFuncionario.estado);
+        rbMasculino.setChecked(mFuncionario.sexo == 1);
+        rbFeminino.setChecked(mFuncionario.sexo == 0);
     }
 
     private void selectItemEstado(String siglaEstado) {
@@ -152,11 +151,44 @@ public class FuncionarioActivity extends AppCompatActivity {
         return funcionario;
     }
 
-    private void salvar(Funcionario funcionario) {
+    private void atualizar() {
+        HotelMontainDatabase database = HotelMontainDatabase.getInstance(this);
+        FuncionarioDao dao = database.funcionarioDao();
+        Funcionario func = funcionario();
+
+        try {
+            dao.atualizar(func.nome, func.email, func.dataNascimento, func.sexo, func.estadoCivil,
+                    func.cep, func.cargo, func.telefone, func.endereco, func.numero,
+                    func.cidade, func.estado, func.cpf);
+
+            new AlertDialog.Builder(this)
+                    .setMessage("Funcionário ATUALIZADO com sucesso")
+                    .setNeutralButton("Ok", (dialog, which) -> finish())
+                    .setCancelable(false)
+                    .show();
+
+        } catch (Exception e) {
+            Log.e("Erro", e.getMessage());
+            AlertUtil.showAlert(this, "Erro ao tentar ATUALIZAR funcionário");
+        }
+    }
+
+    private void inserir() {
         HotelMontainDatabase database = HotelMontainDatabase.getInstance(this);
         FuncionarioDao funcionarioDao = database.funcionarioDao();
 
-        funcionarioDao.inserir(funcionario);
+        try {
+            funcionarioDao.inserir(funcionario());
+            new AlertDialog.Builder(this)
+                    .setMessage("Funcionário CADASTRADO com sucesso")
+                    .setNeutralButton("Ok", (dialog, which) -> finish())
+                    .setCancelable(false)
+                    .show();
+
+        } catch (Exception e) {
+            Log.e("Erro", e.getMessage());
+            AlertUtil.showAlert(this, "Erro ao tentar CADASTRAR funcionário");
+        }
     }
 
     private String dataNascimento() {

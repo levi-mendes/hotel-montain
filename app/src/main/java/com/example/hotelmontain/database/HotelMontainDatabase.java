@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 @Database(entities = {
         Funcionario.class, Quarto.class, Reserva.class
 },
-        version = 6)
+        version = 7)
 public abstract class HotelMontainDatabase extends RoomDatabase {
 
     private static HotelMontainDatabase mAppDatabase;
