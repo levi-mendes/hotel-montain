@@ -57,7 +57,7 @@ public class ReservaActivity extends AppCompatActivity {
         spQuartos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mQuartoSelecionado = quartosAdapter.getPosition(position);
+                mQuartoSelecionado = Integer.parseInt(quartosAdapter.getItem(position).toString());
             }
 
             @Override
@@ -103,7 +103,9 @@ public class ReservaActivity extends AppCompatActivity {
 
     private void selectQuartoSelecionado() {
         for (int index = 0; index < quartosAdapter.getCount(); index++) {
-            if (quartosAdapter.getItem(index).equals(mReserva.numQuarto)) {
+            String item = quartosAdapter.getItem(index).toString();
+
+            if (item.equals(valueOf(mReserva.numQuarto))) {
                 spQuartos.setSelection(index);
             }
         }
@@ -131,7 +133,7 @@ public class ReservaActivity extends AppCompatActivity {
         Calendar calendario = Calendar.getInstance();
 
         int ano = calendario.get(Calendar.YEAR);
-        int mes = calendario.get(Calendar.MONTH);
+        int mes = calendario.get(Calendar.MONTH) + 1;
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
         new DatePickerDialog(this, mDateSetListener, ano, mes, dia).show();
@@ -139,7 +141,7 @@ public class ReservaActivity extends AppCompatActivity {
 
     private final DatePickerDialog.OnDateSetListener mDateSetListener =
             (view, year, monthOfYear, dayOfMonth) ->
-                    etDataHora.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
+                    etDataHora.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
 
     private void salvar() {
         ReservaDao dao = HotelMontainDatabase.getInstance(this).reservaDao();
