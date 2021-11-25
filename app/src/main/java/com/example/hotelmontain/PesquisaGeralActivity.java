@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.hotelmontain.activities.FuncionarioActivity;
+import com.example.hotelmontain.activities.cadastros.FuncionarioActivity;
 import com.example.hotelmontain.database.Funcionario;
 import com.example.hotelmontain.database.FuncionarioDao;
 import com.example.hotelmontain.database.HotelMontainDatabase;

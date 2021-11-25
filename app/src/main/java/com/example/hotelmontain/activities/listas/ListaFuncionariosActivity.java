@@ -1,8 +1,10 @@
-package com.example.hotelmontain;
+package com.example.hotelmontain.activities.listas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.hotelmontain.R;
 
 public class ListaFuncionariosActivity extends AppCompatActivity {
 

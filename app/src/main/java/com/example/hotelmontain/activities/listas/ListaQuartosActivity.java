@@ -1,4 +1,4 @@
-package com.example.hotelmontain.activities;
+package com.example.hotelmontain.activities.listas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.example.hotelmontain.R;
+import com.example.hotelmontain.activities.cadastros.QuartoActivity;
 import com.example.hotelmontain.adapter.ListaQuartosAdapter;
 import com.example.hotelmontain.database.HotelMontainDatabase;
 import com.example.hotelmontain.database.Quarto;

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hotelmontain.R;
-import com.example.hotelmontain.activities.QuartoActivity;
+import com.example.hotelmontain.activities.cadastros.QuartoActivity;
 import com.example.hotelmontain.database.HotelMontainDatabase;
 import com.example.hotelmontain.database.Quarto;
 import com.example.hotelmontain.database.QuartoDao;
@@ -24,9 +24,9 @@ import static java.lang.String.valueOf;
 
 public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapter.ViewHolder> {
 
-    private List<Quarto> localDataSet;
-    private OnQuartoRemovido onQuartoRemovido;
-    private Context mContext;
+    private final List<Quarto> localDataSet;
+    private final OnQuartoRemovido onQuartoRemovido;
+    private final Context mContext;
 
     public ListaQuartosAdapter(Context context, List<Quarto> dataSet, OnQuartoRemovido onQuartoRemovido) {
         localDataSet = dataSet;

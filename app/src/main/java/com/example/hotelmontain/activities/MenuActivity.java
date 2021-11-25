@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.example.hotelmontain.PesquisaGeralActivity;
 import com.example.hotelmontain.R;
+import com.example.hotelmontain.activities.cadastros.FuncionarioActivity;
+import com.example.hotelmontain.activities.cadastros.ReservaActivity;
+import com.example.hotelmontain.activities.listas.ListaQuartosActivity;
 
 public class MenuActivity extends AppCompatActivity {
 

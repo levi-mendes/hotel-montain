@@ -1,4 +1,4 @@
-package com.example.hotelmontain.activities;
+package com.example.hotelmontain.activities.cadastros;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;

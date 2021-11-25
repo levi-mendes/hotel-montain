@@ -1,4 +1,4 @@
-package com.example.hotelmontain.activities;
+package com.example.hotelmontain.activities.listas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.hotelmontain.R;
 
-public class FornecedorActivity extends AppCompatActivity {
+public class ListaFornecedoresActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fornecedor);
+        setContentView(R.layout.activity_lista_fornecedores);
     }
 }
