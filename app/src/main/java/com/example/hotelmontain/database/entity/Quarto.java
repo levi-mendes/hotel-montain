@@ -19,4 +19,19 @@ public class Quarto implements Serializable {
     public int numTelefone;
     public int status;
     public double valor;
+
+    public Quarto(int numCamas, int numTvs, int andar, int numBanheiros,
+                  int numQuarto, int numTelefone, int status, double valor) {
+
+        this.numCamas = numCamas;
+        this.numTvs = numTvs;
+        this.andar = andar;
+        this.numBanheiros = numBanheiros;
+        this.numQuarto = numQuarto;
+        this.numTelefone = numTelefone;
+        this.status = status;
+        this.valor = valor;
+    }
+
+    public Quarto() {}
 }

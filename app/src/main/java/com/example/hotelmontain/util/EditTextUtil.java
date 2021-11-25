@@ -31,4 +31,8 @@ public class EditTextUtil {
     public static boolean isEmpty(TextInputEditText inputEditText) {
         return inputEditText.getText().toString().isEmpty();
     }
+
+    public static String getTexto(TextInputEditText inputEditText) {
+        return inputEditText.getText().toString().trim();
+    }
 }
