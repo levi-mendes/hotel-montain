@@ -6,8 +6,8 @@ import android.os.Bundle;
 import com.example.hotelmontain.PesquisaGeralActivity;
 import com.example.hotelmontain.R;
 import com.example.hotelmontain.activities.cadastros.FuncionarioActivity;
-import com.example.hotelmontain.activities.cadastros.ReservaActivity;
 import com.example.hotelmontain.activities.listas.ListaQuartosActivity;
+import com.example.hotelmontain.activities.listas.ListaReservasActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -28,6 +28,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ListaQuartosActivity.class)));
 
         findViewById(R.id.bt_reservas).setOnClickListener(v ->
-                startActivity(new Intent(this, ReservaActivity.class)));
+                startActivity(new Intent(this, ListaReservasActivity.class)));
     }
 }

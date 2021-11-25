@@ -7,15 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.hotelmontain.R;
-import com.example.hotelmontain.activities.cadastros.QuartoActivity;
+import com.example.hotelmontain.activities.cadastros.ReservaActivity;
 import com.example.hotelmontain.database.HotelMontainDatabase;
-import com.example.hotelmontain.database.entity.Quarto;
-import com.example.hotelmontain.database.dao.QuartoDao;
+import com.example.hotelmontain.database.dao.ReservaDao;
+import com.example.hotelmontain.database.entity.Reserva;
 import com.example.hotelmontain.util.AlertUtil;
 import com.example.hotelmontain.util.ToastUtil;
 
@@ -25,13 +23,13 @@ import static java.lang.String.valueOf;
 
 public class ListaReservasAdapter extends RecyclerView.Adapter<ListaReservasAdapter.ViewHolder> {
 
-    private final List<Quarto> localDataSet;
-    private final OnQuartoRemovido onQuartoRemovido;
+    private final List<Reserva> localDataSet;
+    private final OnReservaDelete onReservaDelete;
     private final Context mContext;
 
-    public ListaReservasAdapter(Context context, List<Quarto> dataSet, OnQuartoRemovido onQuartoRemovido) {
+    public ListaReservasAdapter(Context context, List<Reserva> dataSet, OnReservaDelete onReservaDelete) {
         localDataSet = dataSet;
-        this.onQuartoRemovido = onQuartoRemovido;
+        this.onReservaDelete = onReservaDelete;
         mContext = context;
     }
 
@@ -41,15 +39,16 @@ public class ListaReservasAdapter extends RecyclerView.Adapter<ListaReservasAdap
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView tvNumQuarto, tvAndar, tvTelefone;
+        private final TextView tvNumReserva, tvNumQuarto, tvQtdeHospedes, tvDataHorario;
         private final ImageView ivEdit, ivApagar;
 
         public ViewHolder(View view) {
             super(view);
 
+            tvNumReserva = view.findViewById(R.id.tv_num_reserva);
             tvNumQuarto = view.findViewById(R.id.tv_num_quarto);
-            tvAndar = view.findViewById(R.id.tv_andar);
-            tvTelefone = view.findViewById(R.id.tv_telefone);
+            tvQtdeHospedes = view.findViewById(R.id.tv_qtde_hospedes);
+            tvDataHorario = view.findViewById(R.id.tv_data_horario);
 
             ivEdit = view.findViewById(R.id.iv_edit);
             ivApagar = view.findViewById(R.id.iv_apagar);
@@ -58,34 +57,35 @@ public class ListaReservasAdapter extends RecyclerView.Adapter<ListaReservasAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_lista_quarto, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_lista_reservas, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Quarto quarto = localDataSet.get(position);
+        Reserva reserva = localDataSet.get(position);
 
-        viewHolder.tvNumQuarto.append(valueOf(quarto.numQuarto));
-        viewHolder.tvAndar.append(valueOf(quarto.andar));
-        viewHolder.tvTelefone.append(valueOf(quarto.numTelefone));
+        viewHolder.tvNumQuarto.append(valueOf(reserva.numQuarto));
+        viewHolder.tvNumReserva.append(valueOf(reserva.numReserva));
+        viewHolder.tvQtdeHospedes.append(valueOf(reserva.numHospedes));
+        viewHolder.tvDataHorario.append(valueOf(reserva.dataHorario));
         viewHolder.ivEdit.setOnClickListener(v -> {
-            Intent intent = new Intent(mContext, QuartoActivity.class);
-            intent.putExtra("quarto", quarto);
+            Intent intent = new Intent(mContext, ReservaActivity.class);
+            intent.putExtra("reserva", reserva);
             mContext.startActivity(intent);
         });
-        viewHolder.ivApagar.setOnClickListener(v -> removeDeletion(quarto));
+        viewHolder.ivApagar.setOnClickListener(v -> removeDeletion(reserva));
     }
 
-    private void removeDeletion(Quarto quarto) {
+    private void removeDeletion(Reserva reserva) {
         new AlertDialog.Builder(mContext)
-                .setMessage("Confirma a EXCLUSAP dessa reserva ?")
+                .setMessage("Confirma a EXCLUSAO dessa reserva ?")
                 .setPositiveButton("Sim", (dialog, which) -> {
                     try {
-                        QuartoDao dao = HotelMontainDatabase.getInstance(mContext).quartoDao();
-                        dao.remover(quarto);
-                        onQuartoRemovido.remover(quarto);
+                        ReservaDao dao = HotelMontainDatabase.getInstance(mContext).reservaDao();
+                        dao.remover(reserva);
+                        onReservaDelete.remover(reserva);
                         ToastUtil.show(mContext, "Reserva excluido com sucesso");
 
                     } catch (Exception e) {
@@ -101,8 +101,8 @@ public class ListaReservasAdapter extends RecyclerView.Adapter<ListaReservasAdap
         return localDataSet.size();
     }
 
-    public interface OnQuartoRemovido {
+    public interface OnReservaDelete {
 
-        void remover(Quarto quarto);
+        void remover(Reserva reserva);
     }
 }

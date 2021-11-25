@@ -30,6 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/tv_data_horario"
+        app:layout_constraintStart_toStartOf="@id/tv_num_reserva"
+        android:id="@+id/tv_num_quarto"
+        android:text="Número do Quarto : "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageView
         app:layout_constraintEnd_toStartOf="@id/iv_edit"
         app:layout_constraintTop_toTopOf="parent"
