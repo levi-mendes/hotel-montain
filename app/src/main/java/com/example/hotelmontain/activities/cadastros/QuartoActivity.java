@@ -7,8 +7,8 @@ import android.util.Log;
 
 import com.example.hotelmontain.R;
 import com.example.hotelmontain.database.HotelMontainDatabase;
-import com.example.hotelmontain.database.Quarto;
-import com.example.hotelmontain.database.QuartoDao;
+import com.example.hotelmontain.database.entity.Quarto;
+import com.example.hotelmontain.database.dao.QuartoDao;
 import com.example.hotelmontain.util.AlertUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import static com.example.hotelmontain.util.EditTextUtil.getDouble;

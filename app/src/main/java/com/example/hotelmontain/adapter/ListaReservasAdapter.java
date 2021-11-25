@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,13 +23,13 @@ import java.util.List;
 
 import static java.lang.String.valueOf;
 
-public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapter.ViewHolder> {
+public class ListaReservasAdapter extends RecyclerView.Adapter<ListaReservasAdapter.ViewHolder> {
 
     private final List<Quarto> localDataSet;
     private final OnQuartoRemovido onQuartoRemovido;
     private final Context mContext;
 
-    public ListaQuartosAdapter(Context context, List<Quarto> dataSet, OnQuartoRemovido onQuartoRemovido) {
+    public ListaReservasAdapter(Context context, List<Quarto> dataSet, OnQuartoRemovido onQuartoRemovido) {
         localDataSet = dataSet;
         this.onQuartoRemovido = onQuartoRemovido;
         mContext = context;
@@ -79,16 +80,16 @@ public class ListaQuartosAdapter extends RecyclerView.Adapter<ListaQuartosAdapte
 
     private void removeDeletion(Quarto quarto) {
         new AlertDialog.Builder(mContext)
-                .setMessage("Confirma a exclusao desse quarto ?")
+                .setMessage("Confirma a EXCLUSAP dessa reserva ?")
                 .setPositiveButton("Sim", (dialog, which) -> {
                     try {
                         QuartoDao dao = HotelMontainDatabase.getInstance(mContext).quartoDao();
                         dao.remover(quarto);
                         onQuartoRemovido.remover(quarto);
-                        ToastUtil.show(mContext, "Quarto excluido com sucesso");
+                        ToastUtil.show(mContext, "Reserva excluido com sucesso");
 
                     } catch (Exception e) {
-                        AlertUtil.showAlert(mContext, "Erro ao tentar remover o quarto");
+                        AlertUtil.showAlert(mContext, "Erro ao tentar remover reserva");
                     }
 
                 })

@@ -9,8 +9,8 @@ import com.example.hotelmontain.R;
 import com.example.hotelmontain.activities.cadastros.QuartoActivity;
 import com.example.hotelmontain.adapter.ListaQuartosAdapter;
 import com.example.hotelmontain.database.HotelMontainDatabase;
-import com.example.hotelmontain.database.Quarto;
-import com.example.hotelmontain.database.QuartoDao;
+import com.example.hotelmontain.database.entity.Quarto;
+import com.example.hotelmontain.database.dao.QuartoDao;
 import java.util.List;
 
 public class ListaQuartosActivity extends AppCompatActivity implements ListaQuartosAdapter.OnQuartoRemovido {

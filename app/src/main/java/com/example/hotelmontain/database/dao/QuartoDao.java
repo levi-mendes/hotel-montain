@@ -1,9 +1,12 @@
-package com.example.hotelmontain.database;
+package com.example.hotelmontain.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.hotelmontain.database.entity.Quarto;
+
 import java.util.List;
 
 @Dao

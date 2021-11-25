@@ -1,4 +1,4 @@
-package com.example.hotelmontain.database;
+package com.example.hotelmontain.database.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

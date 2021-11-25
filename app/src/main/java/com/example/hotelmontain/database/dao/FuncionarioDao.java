@@ -1,8 +1,10 @@
-package com.example.hotelmontain.database;
+package com.example.hotelmontain.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.hotelmontain.database.entity.Funcionario;
 
 @Dao
 public interface FuncionarioDao {
