@@ -18,7 +18,6 @@ public class Fornecedor implements Serializable {
     public int sexo;
     public String estadoCivil;
     public String cep;
-//    public String cargo;
     public String telefone;
     public String endereco;
     public String numero;
