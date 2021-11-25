@@ -57,7 +57,7 @@ public abstract class HotelMontainDatabase extends RoomDatabase {
         retorno[0] = new Quarto(1, 1, 3, 1, 301, 301, 1, 200);
         retorno[1] = new Quarto(3, 2, 2, 1, 210, 210, 0, 420);
         retorno[2] = new Quarto(1, 1, 1, 1, 100, 100, 1, 150);
-        retorno[3] = new Quarto(4, 1, 10, 2, 301, 1003, 1, 1500);
+        retorno[3] = new Quarto(4, 1, 10, 2, 430, 1003, 1, 1500);
 
         return retorno;
     }

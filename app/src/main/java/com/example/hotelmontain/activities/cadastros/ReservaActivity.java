@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +17,7 @@ import com.example.hotelmontain.database.dao.ReservaDao;
 import com.example.hotelmontain.database.entity.Quarto;
 import com.example.hotelmontain.database.entity.Reserva;
 import com.example.hotelmontain.util.AlertUtil;
+import com.example.hotelmontain.util.ToastUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +42,14 @@ public class ReservaActivity extends AppCompatActivity {
 
         etNumHospedes = findViewById(R.id.et_num_hospedes);
         etDataHora = findViewById(R.id.et_data_hora);
-        etDataHora.setOnClickListener(v -> requestData());
+        //etDataHora.setOnClickListener(v -> requestData());
+
+        etDataHora.setOnTouchListener((v, event)-> {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    requestData();
+                }
+                return false;
+        });
 
         spQuartos = findViewById(R.id.sp_num_quarto);
 
