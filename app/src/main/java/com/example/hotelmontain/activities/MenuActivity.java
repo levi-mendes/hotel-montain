@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.example.hotelmontain.PesquisaGeralActivity;
 import com.example.hotelmontain.R;
 import com.example.hotelmontain.activities.cadastros.CheckInActivity;
+import com.example.hotelmontain.activities.cadastros.CheckOutActivity;
 import com.example.hotelmontain.activities.listas.ListaFornecedoresActivity;
 import com.example.hotelmontain.activities.listas.ListaFuncionariosActivity;
 import com.example.hotelmontain.activities.listas.ListaHospedeActivity;
@@ -49,7 +50,7 @@ public class MenuActivity extends AppCompatActivity {
         findViewById(R.id.bt_checkin).setOnClickListener(v ->
                 startActivity(new Intent(this, CheckInActivity.class)));
 
-//        findViewById(R.id.bt_checkout).setOnClickListener(v ->
-//                startActivity(new Intent(this, CheckOutActivity.class)));
+        findViewById(R.id.bt_checkout).setOnClickListener(v ->
+                startActivity(new Intent(this, CheckOutActivity.class)));
     }
 }
